@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PaymentsRouteImport } from './routes/payments'
+import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
 import { Route as CategoriesNewRouteImport } from './routes/categories.new'
 import { Route as OrdersIndexRouteImport } from './routes/orders.index'
@@ -35,9 +37,19 @@ const PaymentsRoute = PaymentsRouteImport.update({
   path: '/payments',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReviewsRoute = ReviewsRouteImport.update({
   id: '/reviews',
   path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
@@ -105,7 +117,9 @@ const UsersUserIdEditRoute = UsersUserIdEditRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/payments': typeof PaymentsRoute
+  '/reports': typeof ReportsRoute
   '/reviews': typeof ReviewsRoute
+  '/settings': typeof SettingsRoute
   '/categories/new': typeof CategoriesNewRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/orders/new': typeof OrdersNewRoute
@@ -122,7 +136,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/payments': typeof PaymentsRoute
+  '/reports': typeof ReportsRoute
   '/reviews': typeof ReviewsRoute
+  '/settings': typeof SettingsRoute
   '/categories/new': typeof CategoriesNewRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/orders/new': typeof OrdersNewRoute
@@ -140,7 +156,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/payments': typeof PaymentsRoute
+  '/reports': typeof ReportsRoute
   '/reviews': typeof ReviewsRoute
+  '/settings': typeof SettingsRoute
   '/categories/new': typeof CategoriesNewRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/orders/new': typeof OrdersNewRoute
@@ -159,7 +177,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/payments'
+    | '/reports'
     | '/reviews'
+    | '/settings'
     | '/categories/new'
     | '/orders/$orderId'
     | '/orders/new'
@@ -176,7 +196,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/payments'
+    | '/reports'
     | '/reviews'
+    | '/settings'
     | '/categories/new'
     | '/orders/$orderId'
     | '/orders/new'
@@ -193,7 +215,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/payments'
+    | '/reports'
     | '/reviews'
+    | '/settings'
     | '/categories/new'
     | '/orders/$orderId'
     | '/orders/new'
@@ -211,7 +235,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PaymentsRoute: typeof PaymentsRoute
+  ReportsRoute: typeof ReportsRoute
   ReviewsRoute: typeof ReviewsRoute
+  SettingsRoute: typeof SettingsRoute
   CategoriesNewRoute: typeof CategoriesNewRoute
   OrdersOrderIdRoute: typeof OrdersOrderIdRoute
   OrdersNewRoute: typeof OrdersNewRoute
@@ -242,11 +268,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PaymentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reviews': {
       id: '/reviews'
       path: '/reviews'
       fullPath: '/reviews'
       preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/categories/': {
@@ -339,7 +379,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PaymentsRoute: PaymentsRoute,
+  ReportsRoute: ReportsRoute,
   ReviewsRoute: ReviewsRoute,
+  SettingsRoute: SettingsRoute,
   CategoriesNewRoute: CategoriesNewRoute,
   OrdersOrderIdRoute: OrdersOrderIdRoute,
   OrdersNewRoute: OrdersNewRoute,
