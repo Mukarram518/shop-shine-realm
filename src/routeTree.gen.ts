@@ -10,16 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
+import { Route as CategoriesNewRouteImport } from './routes/categories.new'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsNewRouteImport } from './routes/products.new'
 import { Route as UsersIndexRouteImport } from './routes/users.index'
 import { Route as UsersNewRouteImport } from './routes/users.new'
+import { Route as CategoriesCategoryIdEditRouteImport } from './routes/categories.$categoryId.edit'
 import { Route as ProductsProductIdEditRouteImport } from './routes/products.$productId.edit'
 import { Route as UsersUserIdEditRouteImport } from './routes/users.$userId.edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
+  id: '/categories/',
+  path: '/categories/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesNewRoute = CategoriesNewRouteImport.update({
+  id: '/categories/new',
+  path: '/categories/new',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
@@ -42,6 +55,12 @@ const UsersNewRoute = UsersNewRouteImport.update({
   path: '/users/new',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CategoriesCategoryIdEditRoute =
+  CategoriesCategoryIdEditRouteImport.update({
+    id: '/categories/$categoryId/edit',
+    path: '/categories/$categoryId/edit',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ProductsProductIdEditRoute = ProductsProductIdEditRouteImport.update({
   id: '/products/$productId/edit',
   path: '/products/$productId/edit',
@@ -55,29 +74,38 @@ const UsersUserIdEditRoute = UsersUserIdEditRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/categories/new': typeof CategoriesNewRoute
   '/products/new': typeof ProductsNewRoute
   '/users/new': typeof UsersNewRoute
+  '/categories/': typeof CategoriesIndexRoute
   '/products/': typeof ProductsIndexRoute
   '/users/': typeof UsersIndexRoute
+  '/categories/$categoryId/edit': typeof CategoriesCategoryIdEditRoute
   '/products/$productId/edit': typeof ProductsProductIdEditRoute
   '/users/$userId/edit': typeof UsersUserIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/categories/new': typeof CategoriesNewRoute
   '/products/new': typeof ProductsNewRoute
   '/users/new': typeof UsersNewRoute
+  '/categories': typeof CategoriesIndexRoute
   '/products': typeof ProductsIndexRoute
   '/users': typeof UsersIndexRoute
+  '/categories/$categoryId/edit': typeof CategoriesCategoryIdEditRoute
   '/products/$productId/edit': typeof ProductsProductIdEditRoute
   '/users/$userId/edit': typeof UsersUserIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/categories/new': typeof CategoriesNewRoute
   '/products/new': typeof ProductsNewRoute
   '/users/new': typeof UsersNewRoute
+  '/categories/': typeof CategoriesIndexRoute
   '/products/': typeof ProductsIndexRoute
   '/users/': typeof UsersIndexRoute
+  '/categories/$categoryId/edit': typeof CategoriesCategoryIdEditRoute
   '/products/$productId/edit': typeof ProductsProductIdEditRoute
   '/users/$userId/edit': typeof UsersUserIdEditRoute
 }
@@ -85,38 +113,50 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/categories/new'
     | '/products/new'
     | '/users/new'
+    | '/categories/'
     | '/products/'
     | '/users/'
+    | '/categories/$categoryId/edit'
     | '/products/$productId/edit'
     | '/users/$userId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/categories/new'
     | '/products/new'
     | '/users/new'
+    | '/categories'
     | '/products'
     | '/users'
+    | '/categories/$categoryId/edit'
     | '/products/$productId/edit'
     | '/users/$userId/edit'
   id:
     | '__root__'
     | '/'
+    | '/categories/new'
     | '/products/new'
     | '/users/new'
+    | '/categories/'
     | '/products/'
     | '/users/'
+    | '/categories/$categoryId/edit'
     | '/products/$productId/edit'
     | '/users/$userId/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CategoriesNewRoute: typeof CategoriesNewRoute
   ProductsNewRoute: typeof ProductsNewRoute
   UsersNewRoute: typeof UsersNewRoute
+  CategoriesIndexRoute: typeof CategoriesIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
   UsersIndexRoute: typeof UsersIndexRoute
+  CategoriesCategoryIdEditRoute: typeof CategoriesCategoryIdEditRoute
   ProductsProductIdEditRoute: typeof ProductsProductIdEditRoute
   UsersUserIdEditRoute: typeof UsersUserIdEditRoute
 }
@@ -128,6 +168,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/': {
+      id: '/categories/'
+      path: '/categories'
+      fullPath: '/categories/'
+      preLoaderRoute: typeof CategoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/new': {
+      id: '/categories/new'
+      path: '/categories/new'
+      fullPath: '/categories/new'
+      preLoaderRoute: typeof CategoriesNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products/': {
@@ -158,6 +212,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/categories/$categoryId/edit': {
+      id: '/categories/$categoryId/edit'
+      path: '/categories/$categoryId/edit'
+      fullPath: '/categories/$categoryId/edit'
+      preLoaderRoute: typeof CategoriesCategoryIdEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products/$productId/edit': {
       id: '/products/$productId/edit'
       path: '/products/$productId/edit'
@@ -177,10 +238,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CategoriesNewRoute: CategoriesNewRoute,
   ProductsNewRoute: ProductsNewRoute,
   UsersNewRoute: UsersNewRoute,
+  CategoriesIndexRoute: CategoriesIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
   UsersIndexRoute: UsersIndexRoute,
+  CategoriesCategoryIdEditRoute: CategoriesCategoryIdEditRoute,
   ProductsProductIdEditRoute: ProductsProductIdEditRoute,
   UsersUserIdEditRoute: UsersUserIdEditRoute,
 }
