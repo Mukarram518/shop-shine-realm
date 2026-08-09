@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PaymentsRouteImport } from './routes/payments'
+import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
 import { Route as CategoriesNewRouteImport } from './routes/categories.new'
 import { Route as OrdersIndexRouteImport } from './routes/orders.index'
@@ -26,6 +28,16 @@ import { Route as UsersUserIdEditRouteImport } from './routes/users.$userId.edit
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentsRoute = PaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
@@ -92,6 +104,8 @@ const UsersUserIdEditRoute = UsersUserIdEditRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/payments': typeof PaymentsRoute
+  '/reviews': typeof ReviewsRoute
   '/categories/new': typeof CategoriesNewRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/orders/new': typeof OrdersNewRoute
@@ -107,6 +121,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/payments': typeof PaymentsRoute
+  '/reviews': typeof ReviewsRoute
   '/categories/new': typeof CategoriesNewRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/orders/new': typeof OrdersNewRoute
@@ -123,6 +139,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/payments': typeof PaymentsRoute
+  '/reviews': typeof ReviewsRoute
   '/categories/new': typeof CategoriesNewRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/orders/new': typeof OrdersNewRoute
@@ -140,6 +158,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/payments'
+    | '/reviews'
     | '/categories/new'
     | '/orders/$orderId'
     | '/orders/new'
@@ -155,6 +175,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/payments'
+    | '/reviews'
     | '/categories/new'
     | '/orders/$orderId'
     | '/orders/new'
@@ -170,6 +192,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/payments'
+    | '/reviews'
     | '/categories/new'
     | '/orders/$orderId'
     | '/orders/new'
@@ -186,6 +210,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PaymentsRoute: typeof PaymentsRoute
+  ReviewsRoute: typeof ReviewsRoute
   CategoriesNewRoute: typeof CategoriesNewRoute
   OrdersOrderIdRoute: typeof OrdersOrderIdRoute
   OrdersNewRoute: typeof OrdersNewRoute
@@ -207,6 +233,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payments': {
+      id: '/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof PaymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/categories/': {
@@ -298,6 +338,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PaymentsRoute: PaymentsRoute,
+  ReviewsRoute: ReviewsRoute,
   CategoriesNewRoute: CategoriesNewRoute,
   OrdersOrderIdRoute: OrdersOrderIdRoute,
   OrdersNewRoute: OrdersNewRoute,
