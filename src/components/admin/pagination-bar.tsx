@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 interface PaginationBarProps {
   page: number;
-  pageСount?: never;
+
   pageCount: number;
   total: number;
   pageSize: number;

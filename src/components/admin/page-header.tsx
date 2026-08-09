@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -6,9 +6,10 @@ interface PageHeaderProps {
   title: string;
   description?: string;
   action?: ReactNode;
-  backTo?: string;
+  backTo?: LinkProps["to"];
   backLabel?: string;
 }
+
 
 export function PageHeader({ title, description, action, backTo, backLabel }: PageHeaderProps) {
   return (
